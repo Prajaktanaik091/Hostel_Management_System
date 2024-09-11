@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Updates</title>
+
+<!-- {% load static %} -->
+{% load static %}
+<style>
+    .right {
+        background-image: url("{% static 'images/main.jpeg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: fit-content;
+        /* width: 200px; */
+        height:500px;
+        width:50%;
+        /* border:solid black 2px; */
+        /* position: absolute; */
+        margin-left: 50%;
+        margin-right: 10px;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/newindex.css' %}">
+
+</head>
+<body>
+    <div class="nav">
+        <center>
+            <h1>Welcome To Home Page</h1>
+        </center>
+    </div> 
+    <div class="nav2">
+        <div class="pane_items">
+            <a href="/menu_checking">check menu</a>
+        </div>
+        <div class="pane_items">
+            <a href="/roomate_search">find roomate</a>
+        </div>
+        <div class="pane_items">
+            <a href="/updates">check updates</a>
+        </div>
+        
+        <div class="pane_items">
+            <a href="/room_photos/">Images</a>
+        </div>
+        <div class="pane_items">
+            <a href="/logout_page/">logout</a>
+        </div>
+        <div class="pane_items">
+            <a href="/complain/">Complaints</a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="left">
+              <p>
+                <h1> Welcome!</h1>
+                <p>Far Away,Far From the Home,Far From the Love,Far from the Affection of the Home,Students Come to Build their Careers.</p>
+                <div class="button-container">
+                    <form method="post">
+                        {% csrf_token %}
+                    <input type="submit" class="start-button" name="start-communication" value="start-communication">
+                    </form>
+                </div>
+        </div>
+        <div class="right">
+            
+        </div>
+
+    </div>
+    
+    
+    
+        
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Notice</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Link to your CSS file if needed -->
+</head>
+<body>
+    <h1>Enter Your Details</h1>
+    <form method="post" action="{% url 'roomate_search' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text" id="id_title" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" id="id_title" name="number" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <center>
+    <table border="10px">
+        {% if people %}
+                {% for person in people %}
+                    <tr>
+                        <td>{{ person.name}}</td>
+                        <td>{{ person.mobilenumber }}</td>
+                    </tr>
+                {% endfor %}
+        {% else %}
+                <tr>
+                    <td colspan="2">No One Available.</td>
+                </tr>
+        {% endif %}
+    </table>
+</center>
+</body>
+</html>

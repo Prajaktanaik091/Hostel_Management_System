@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+    <style>
+        input[type="submit"]{
+            background-color: green;
+            color: antiquewhite;
+            height:50px;
+            width:100px;
+            margin:30px;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Hello Students,</h1>
+    <table border="10px">
+        {% if notices %}
+                {% for notice in notices %}
+                    <tr>
+                        <td>{{ notice.title }}</td>
+                        <td>{{ notice.description }}</td>
+                    </tr>
+                {% endfor %}
+        {% else %}
+                <tr>
+                    <td colspan="2">No updates available.</td>
+                </tr>
+        {% endif %}
+    </table>
+    <form method="post" >
+        {% csrf_token %}
+        <input type="submit" value="Enter Update"/>
+    </form>
+</body>
+</html>

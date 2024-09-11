@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Payment</title>
+</head>
+<body>
+    <h1>Confirm Payment</h1>
+    <p>Complete your payment using the form below.</p>
+    
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <script type="text/javascript">
+        var options = {
+            "key": "{{ razorpay_key }}", // Your Razorpay API Key
+            "amount": "{{ amount }}", // Amount in paise
+            "currency": "{{ currency }}",
+            "name": "Your Company Name",
+            "description": "Payment for fees",
+            "order_id": "{{ razorpay_order_id }}", // Order ID created by Razorpay
+            "handler": function (response) {
+                // Send payment details to your server
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "{% url 'payment_success' %}", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("razorpay_payment_id=" + response.razorpay_payment_id + "&razorpay_order_id=" + response.razorpay_order_id + "&razorpay_signature=" + response.razorpay_signature);
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        window.location.href = "/"; // Redirect on successful payment
+                    } else {
+                        alert("Payment failed. Please try again.");
+                    }
+                };
+            },
+            "prefill": {
+                "name": "Student Name", // Prefill user details if available
+                "email": "student@example.com",
+                "contact": "9999999999"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    </script>
+</body>
+</html>
